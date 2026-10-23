@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kalim ul Haq</title>
+    <meta
+      name="description"
+      content="Kalim ul Haq, software engineer in Dubai. Open-source packages for Laravel, Node and AWS: deep links, query builders, image resizing."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e1b3d'/%3E%3Ctext x='16' y='21.5' font-family='Arial' font-weight='700' font-size='14' text-anchor='middle' fill='%23ffc72c'%3EKH%3C/text%3E%3C/svg%3E"
+    />
+    <style>
+      :root {
+        --paper: #f5f6fa;
+        --ink: #0e1b3d;
+        --muted: #5a6482;
+        --line: #dde1ec;
+        --code-bg: #e9ecf4;
+        --saffron: #ffc72c;
+        --link: #1d3fa8;
+        --sans: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+        --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --paper: #0e1b3d;
+          --ink: #e8ecf6;
+          --muted: #a9b3cf;
+          --line: #24345f;
+          --code-bg: #17284f;
+          --link: #9fb7ff;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font: 400 1.125rem/1.6 var(--sans);
+        font-optical-sizing: auto;
+      }
+      .page {
+        max-width: 46rem;
+        margin: 0 auto;
+        padding: 3.5rem 1.25rem 4rem;
+      }
+      a {
+        color: var(--link);
+        text-underline-offset: 0.2em;
+        text-decoration-thickness: 1px;
+      }
+      a:hover {
+        text-decoration-thickness: 2px;
+      }
+      :focus-visible {
+        outline: 3px solid var(--saffron);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+
+      /* Header */
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 4.5rem;
+      }
+      .mark {
+        display: grid;
+        place-items: center;
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: 0.6rem;
+        background: var(--saffron);
+        color: #0e1b3d;
+        font-weight: 800;
+        font-size: 1rem;
+        letter-spacing: 0.02em;
+        text-decoration: none;
+      }
+      .elsewhere {
+        display: flex;
+        gap: 1.25rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: 1rem;
+      }
+
+      /* Hero */
+      h1 {
+        margin: 0;
+        font-size: clamp(3rem, 11vw, 5.75rem);
+        font-weight: 800;
+        line-height: 0.95;
+        letter-spacing: -0.035em;
+      }
+      .intro {
+        max-width: 34rem;
+        margin: 1.5rem 0 0;
+        font-size: 1.3rem;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+
+      /* Projects */
+      h2 {
+        margin: 5rem 0 0.5rem;
+        font-size: 1.6rem;
+        font-weight: 800;
+        letter-spacing: -0.015em;
+      }
+      .projects {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .project {
+        padding: 2.25rem 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .project:last-child {
+        border-bottom: 0;
+      }
+      .project h3 {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 0.25rem 0.75rem;
+        margin: 0;
+        font-size: 1.55rem;
+        font-weight: 600;
+        letter-spacing: -0.015em;
+      }
+      .project h3 a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .project h3 a:hover {
+        text-decoration: underline;
+      }
+      .stack {
+        font-size: 0.95rem;
+        font-weight: 400;
+        color: var(--muted);
+        letter-spacing: 0;
+      }
+      .project p {
+        margin: 0.4rem 0 1rem;
+        max-width: 38rem;
+      }
+
+      /* The command or URL each project is used through: the one thing to copy. */
+      .use {
+        display: flex;
+        align-items: stretch;
+        max-width: 100%;
+        border-radius: 0.55rem;
+        background: var(--code-bg);
+        overflow: hidden;
+      }
+      .use code {
+        flex: 1;
+        min-width: 0;
+        padding: 0.8rem 1rem;
+        font: 500 0.95rem/1.4 var(--mono);
+        white-space: nowrap;
+        overflow-x: auto;
+      }
+      .use code::before {
+        content: attr(data-prompt);
+        color: var(--muted);
+        user-select: none;
+      }
+      .copy {
+        flex: none;
+        min-width: 5.5rem;
+        border: 0;
+        border-left: 1px solid var(--line);
+        background: transparent;
+        color: var(--ink);
+        font: 600 0.9rem var(--sans);
+        cursor: pointer;
+      }
+      .copy:hover {
+        background: var(--saffron);
+        color: #0e1b3d;
+      }
+      .copy[data-done] {
+        background: var(--saffron);
+        color: #0e1b3d;
+      }
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem 1.25rem;
+        margin: 1rem 0 0;
+        padding: 0;
+        list-style: none;
+        font-size: 1rem;
+      }
+
+      .earlier {
+        margin: 3.5rem 0 0;
+        color: var(--muted);
+        font-size: 1rem;
+      }
+
+      footer {
+        margin-top: 5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 34rem) {
+        .page {
+          padding-top: 2rem;
+        }
+        .top {
+          margin-bottom: 3rem;
+        }
+        .intro {
+          font-size: 1.15rem;
+        }
+        .use code {
+          font-size: 0.85rem;
+        }
+        .copy {
+          min-width: 4.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="top">
+        <a class="mark" href="./" aria-label="Kalim ul Haq, home">KH</a>
+        <ul class="elsewhere">
+          <li><a href="https://github.com/kalimulhaq">GitHub</a></li>
+          <li><a href="https://linkedin.com/in/kalimulhaq">LinkedIn</a></li>
+          <li><a href="https://x.com/KalimDev">X</a></li>
+        </ul>
+      </header>
+
+      <main>
+        <h1>Kalim ul&nbsp;Haq</h1>
+        <p class="intro">
+          Software engineer in Dubai. I publish open-source packages for Laravel, Node and AWS that take care of
+          the plumbing: deep links, API query builders, image resizing.
+        </p>
+
+        <h2 id="projects">Projects</h2>
+        <ul class="projects">
+          <li class="project">
+            <h3>
+              <a href="https://github.com/kalimulhaq/deeplinker">deeplinker</a>
+              <span class="stack">TypeScript, npm</span>
+            </h3>
+            <p>
+              One config file turns any page on your site into a deep link. It opens your app, sends people to the
+              right app store for their device, or falls back to your web app.
+            </p>
+            <div class="use">
+              <code data-prompt="$ ">npm i -D @kalimulhaq/deeplinker</code>
+              <button class="copy" type="button" data-copy="npm i -D @kalimulhaq/deeplinker">Copy</button>
+            </div>
+            <ul class="links">
+              <li><a href="https://github.com/kalimulhaq/deeplinker">Source</a></li>
+              <li><a href="https://www.npmjs.com/package/@kalimulhaq/deeplinker">npm</a></li>
+              <li><a href="https://kalimulhaq.github.io/deeplinker/">Web generator</a></li>
+            </ul>
+          </li>
+
+          <li class="project">
+            <h3>
+              <a href="https://github.com/kalimulhaq/qubuilder">qubuilder</a>
+              <span class="stack">PHP, Laravel</span>
+            </h3>
+            <p>
+              Turns a structured filter payload from a request into a chained Eloquent query, ready to paginate. No
+              hand-written <code>if</code> chains in every endpoint.
+            </p>
+            <div class="use">
+              <code data-prompt="$ ">composer require kalimulhaq/qubuilder</code>
+              <button class="copy" type="button" data-copy="composer require kalimulhaq/qubuilder">Copy</button>
+            </div>
+            <ul class="links">
+              <li><a href="https://github.com/kalimulhaq/qubuilder">Source</a></li>
+              <li><a href="https://packagist.org/packages/kalimulhaq/qubuilder">Packagist</a></li>
+            </ul>
+          </li>
+
+          <li class="project">
+            <h3>
+              <a href="https://github.com/kalimulhaq/lambda-image-resizer">lambda-image-resizer</a>
+              <span class="stack">Python, AWS</span>
+            </h3>
+            <p>
+              Resizes and converts images on the fly for any S3 and CloudFront setup, as a Lambda@Edge function.
+              Ask for a size and a format in the URL:
+            </p>
+            <div class="use">
+              <code>https://your-cdn.example.com/uploads/photo.jpg?w=500&amp;f=webp</code>
+              <button
+                class="copy"
+                type="button"
+                data-copy="https://your-cdn.example.com/uploads/photo.jpg?w=500&f=webp"
+              >
+                Copy
+              </button>
+            </div>
+            <ul class="links">
+              <li><a href="https://github.com/kalimulhaq/lambda-image-resizer">Source</a></li>
+              <li><a href="https://github.com/kalimulhaq/lambda-image-resizer/releases">Download</a></li>
+            </ul>
+          </li>
+
+          <li class="project">
+            <h3>
+              <a href="https://github.com/kalimulhaq/pulse-cronwatch">pulse-cronwatch</a>
+              <span class="stack">PHP, Laravel Pulse</span>
+            </h3>
+            <p>
+              A Laravel Pulse card for your scheduled commands: when each one last ran, how often it fails, and
+              when it runs next.
+            </p>
+            <div class="use">
+              <code data-prompt="$ ">composer require kalimulhaq/pulse-cronwatch</code>
+              <button class="copy" type="button" data-copy="composer require kalimulhaq/pulse-cronwatch">
+                Copy
+              </button>
+            </div>
+            <ul class="links">
+              <li><a href="https://github.com/kalimulhaq/pulse-cronwatch">Source</a></li>
+              <li><a href="https://packagist.org/packages/kalimulhaq/pulse-cronwatch">Packagist</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <p class="earlier">
+          Earlier: <a href="https://github.com/kalimulhaq/json-query">json-query</a>, a JSON query language for
+          Laravel and Lumen APIs. Archived.
+        </p>
+      </main>
+
+      <footer>This page is one HTML file in <a href="https://github.com/kalimulhaq/kalimulhaq.github.io">kalimulhaq/kalimulhaq.github.io</a>.</footer>
+    </div>
+
+    <script>
+      // Copy the command or URL. The button says so for a moment, then goes back.
+      document.addEventListener("click", (event) => {
+        const button = event.target.closest(".copy");
+        if (!button) return;
+        const text = button.dataset.copy;
+        const done = (label) => {
+          button.textContent = label;
+          button.dataset.done = "";
+          setTimeout(() => {
+            button.textContent = "Copy";
+            delete button.dataset.done;
+          }, 1600);
+        };
+        (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject())
+          .then(() => done("Copied"))
+          .catch(() => done("Select it"));
+      });
+    </script>
+  </body>
+</html>
